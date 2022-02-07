@@ -1,0 +1,17 @@
+{
+  "name": "sdc-clay-qa-api",
+  "version": "1.0.0",
+  "description": "API service for the sdc-clay/agaricus Questions & Answers service",
+  "main": "index.js",
+  "scripts": {
+    "test": "test",
+    "start": "nodemon index.js"
+  },
+  "author": "mechanicDev",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^16.0.0",
+    "express": "^4.17.2"
+  },
+  "devDependencies": {}
+}
