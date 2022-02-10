@@ -19,7 +19,6 @@ test('Should hit my base route', () => {
   })
 })
 
-
 test('Testing Jest', () => {
   expect(9).toEqual(9);
 })
