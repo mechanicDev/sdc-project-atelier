@@ -13,7 +13,8 @@
     "axios": "^0.25.0",
     "dotenv": "^16.0.0",
     "express": "^4.17.2",
-    "jquery": "~3.5.1"
+    "jquery": "~3.5.1",
+    "pg": "^8.7.3"
   },
   "devDependencies": {
     "jest": "^27.5.0"
