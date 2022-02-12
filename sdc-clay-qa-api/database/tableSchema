@@ -1,0 +1,9 @@
+CREATE TABLE questions (
+  product_id INT NOT NULL ,
+  body VARCHAR(255) NOT NULL,
+  date_written DATE NOT NULL,
+  asker_name VARCHAR(255) NOT NULL,
+  asker_email VARCHAR(255) NOT NULL,
+  reported INT NOT NULL,
+  helpful INT NOT NULL
+  );
