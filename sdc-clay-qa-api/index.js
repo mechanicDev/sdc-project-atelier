@@ -2,9 +2,11 @@ const Express = require('express');
 const app = Express();
 require('dotenv').config();
 const PORT = process.env.PORT;
+const DB = require('./database/index.js')
 
 app.get('/', (req, res) => {
   console.log('Hallo this is working');
+  DB.query("SELECT * FROM questions WHERE product_id = '1';")
   res.status(200).send('You know it');
 });
 
