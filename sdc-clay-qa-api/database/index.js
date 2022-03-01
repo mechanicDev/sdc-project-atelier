@@ -1,9 +1,17 @@
-const { Client } = require('pg');
+const { Client, Pool } = require('pg');
 require('dotenv').config();
 
 const client = new Client({
   user: process.env.USER,
-  host:process.env.HOST,
+  host: process.env.HOST,
+  database: process.env.DATABASE,
+  password: process.env.PASSWORD,
+  port: process.env.DB_PORT
+});
+
+const pool = new Pool({
+  user: process.env.USER,
+  host: process.env.HOST,
   database: process.env.DATABASE,
   password: process.env.PASSWORD,
   port: process.env.DB_PORT
@@ -11,14 +19,21 @@ const client = new Client({
 
 // DB Methods
 const DB = {
-  query: function () {
+  query: async function (query) {
     client.connect();
-    client.query("SELECT * FROM questions WHERE product_id = '1';")
-      .then(res => {
-        console.log('Connection Successful: ', res.rows)
-        client.end();
-      })
-      .catch(err => console.log('Error: ', err));
+    const response = await client.query(query)
+    return response.rows;
+    client.end()
+  },
+
+  poolQuery: async function () {
+    const client = pool.connect()
+    try {
+      const response = await client.query(query)
+      client.release()
+    } catch (err) {
+      console.log('Error')
+    }
   }
 }
 
