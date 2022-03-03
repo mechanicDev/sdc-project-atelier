@@ -14,22 +14,34 @@ const pool = new Pool({
   host: process.env.HOST,
   database: process.env.DATABASE,
   password: process.env.PASSWORD,
-  port: process.env.DB_PORT
+  port: process.env.DB_PORT,
+  max: 20,
+  connectionTimeoutMillis: 0,
+  idleTimeoutMillis: 0
 });
 
 // DB Methods
 const DB = {
   query: async function (query) {
-    client.connect();
+    const startTime = new Date();
+    await client.connect();
     const response = await client.query(query)
-    return response.rows;
+    const endTime = new Date();
+    console.log(`Operation took ${endTime - startTime}ms`);
     client.end()
+    return response.rows;
   },
 
-  poolQuery: async function () {
+  poolQuery: async function (query) {
+    const startTime = new Date();
     const client = pool.connect()
     try {
-      const response = await client.query(query)
+      // console.log('we are here: ', query);
+      let response = await pool.query(query)
+      // console.log('This is the response thing: ', response.rows)
+      const endTime = new Date();
+      console.log(`Operation took ${endTime - startTime}ms`);
+      return response.rows;
       client.release()
     } catch (err) {
       console.log('Error')
@@ -38,3 +50,5 @@ const DB = {
 }
 
 module.exports = DB;
+
+// Getting time: new Date() before and after... subtract new from old
