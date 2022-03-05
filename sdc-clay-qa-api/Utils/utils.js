@@ -1,6 +1,6 @@
 const DB = require('../database/index.js');
 
-module.exports.questionsIdAnswers = async function (id) {
+module.exports.questionsIdAnswers = async function(id) {
   let result = {};
 
   const questionsData = await DB.poolQuery(`SELECT * FROM answers WHERE question_id = ${id}`);
@@ -16,4 +16,22 @@ module.exports.questionsIdAnswers = async function (id) {
 
   // console.log('Result: ', questionsData)
   return questionsData;
+};
+
+
+module.exports.questionsIdHelpful = async function(id) {
+  const result = await DB.poolQuery(`UPDATE questions SET helpful = helpful + 1 WHERE id = ${id}`);
+};
+
+module.exports.answersIdHelpful = async function(id) {
+  const result = await DB.poolQuery(`UPDATE answers SET helpful = helpful + 1 WHERE id = ${id}`);
+};
+
+module.exports.answersIdReported = async function(id) {
+  const result = await DB.poolQuery(`UPDATE answers SET reported = reported + 1 WHERE id = ${id}`)
+};
+
+module.exports.questionsId = async function(id, page, count) {
+  const result = await DB.poolQuery(`SELECT * FROM questions WHERE id = ${id}`)
+  return result;
 }

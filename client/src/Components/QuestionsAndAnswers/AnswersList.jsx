@@ -11,7 +11,7 @@ class AnswersList extends React.Component {
   }
 
   //method to get answers list for particular questions id passed through props
-  componentDidMount() {
+  componentDidMount() { // SDC Route completed 600 - 2700ms... Need t fix this...
     //make call to api for list using question id
     axios.get(this.props.apiUrl + '/qa/questions/' + this.props.id + '/answers', {
       headers: {
@@ -66,7 +66,7 @@ class AnswersList extends React.Component {
     }
   }
 
-  answerYesLinkPut(id) {
+  answerYesLinkPut(id) { //SDC Route completed 13 MS id = 20
     axios.put(this.props.apiUrl + '/qa/answers/' + id + '/helpful', {
       headers: {
         'Authorization': this.props.token
@@ -81,7 +81,7 @@ class AnswersList extends React.Component {
     })
   }
 
-  reportAnswerPut(id) {
+  reportAnswerPut(id) { // SDC Route completed Response 7ms
     axios.put(this.props.apiUrl + '/qa/answers/' + id + '/report', {
       headers: {
         'Authorization': this.props.token

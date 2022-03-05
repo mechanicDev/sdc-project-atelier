@@ -20,7 +20,7 @@ class QandA extends React.Component {
   }
 
   //method to retrieve data from api on render
-  componentDidMount() {
+  componentDidMount() { // SDC route completed 12-6 ms
     //make call to api
     axios.get(this.props.apiUrl + '/qa/questions', {
       headers: {
