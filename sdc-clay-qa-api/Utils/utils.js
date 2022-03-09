@@ -18,7 +18,6 @@ module.exports.questionsIdAnswers = async function(id) {
   return questionsData;
 };
 
-
 module.exports.questionsIdHelpful = async function(id) {
   const result = await DB.poolQuery(`UPDATE questions SET helpful = helpful + 1 WHERE id = ${id}`);
 };
@@ -35,3 +34,10 @@ module.exports.questionsId = async function(id, page, count) {
   const result = await DB.poolQuery(`SELECT * FROM questions WHERE id = ${id}`)
   return result;
 }
+
+module.exports.questionsPost = async function(body, name, email, product_id) {
+
+  const result = await DB.poolQuery(`INSERT INTO questions(product_id, body, date_written, asker_name, asker_email, reported, helpful) VALUES (${product_id}, ${body}, ${new Date()}, ${name}, ${email}, ${0}, ${0})`)
+
+  console.log('Result: ', result);
+};

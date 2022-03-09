@@ -15,7 +15,6 @@ router.use((req, res, next) => {
 
 router.get('/questions', (req, res) => {
   url = URL.parse(req.url, true).query
-  console.log('URL: ', url)
 
   U.questionsId(url.product_id)
     .then(data => res.status(200).send(data))
@@ -61,5 +60,20 @@ router.put('/answers/:answer_id/report', (req, res) => {
     .catch(error => res.status(400).send(error));
 });
 
+///////////////////
+// Post Requests //
+///////////////////
+
+router.post('/questions', (req, res) => {
+  url = URL.parse(req.url, true).query
+  let body = url.body;
+  let name = url.name;
+  let email = url.email;
+  let product_id = url.product_id;
+
+  U.questionsPost(body, name, email, product_id)
+    .then(data => res.status(200).send('It worked'))
+    .catch(error => res.status(400).send(error));
+});
 
 module.exports = router;
