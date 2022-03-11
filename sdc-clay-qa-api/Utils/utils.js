@@ -31,7 +31,9 @@ module.exports.answersIdReported = async function(id) {
 };
 
 module.exports.questionsId = async function(id, page, count) {
-  const result = await DB.poolQuery(`SELECT * FROM questions WHERE id = ${id}`)
+  const result = await DB.poolQuery(`SELECT * FROM questions WHERE product_id = ${id}`)
+
+  console.log('Query Result: ', result);
   return result;
 }
 
@@ -41,3 +43,9 @@ module.exports.questionsPost = async function(body, name, email, product_id) {
 
   console.log('Result: ', result);
 };
+
+module.exports.questionIdReport = async function(id) {
+  const result = await DB.poolQuery(`UPDATE questions SET reported = reported + 1 WHERE id = ${id}`);
+
+  console.log('Result: ', result)
+}
