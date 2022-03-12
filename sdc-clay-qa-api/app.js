@@ -9,6 +9,8 @@ const cors = require('cors');
 app.use(cors());
 app.use('/qa', questions);
 
-app.listen(PORT, () => {
-  console.log(`Listening on PORT ${PORT}.`);
+app.get('/test', (req, res) => {
+  res.status(200).send('Hallo');
 });
+
+module.exports = app;

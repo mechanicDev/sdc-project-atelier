@@ -14,6 +14,7 @@ router.use((req, res, next) => {
 //////////////////
 
 router.get('/questions', (req, res) => {
+  console.log('This should be logging something');
   url = URL.parse(req.url, true).query
   console.log('Request Params: ', url)
   console.log('This should be hitting')
