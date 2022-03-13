@@ -100,3 +100,15 @@ COPY answers_photos(id, answer_id, url)
 FROM '/Users/user/Desktop/answers_photos.csv'
 DELIMITER ','
 CSV HEADER;
+
+
+/* Testing Queries */
+
+INSERT INTO questions (product_id, body, date_written, asker_name, asker_email, reported, helpful)
+VALUES (123456789, 'Does this thing work??', 1647207259574, 'Bob', 'bob@email.com', 0, 0);
+
+INSERT INTO questions (product_id, body, date_written, asker_name, asker_email, reported, helpful)
+VALUES (123456789, 'Does this thing work??', 1647207259574, 'Bob', 'bob@email.com', 0, 0);
+
+INSERT INTO questions (product_id, body, date_written, asker_name, asker_email, reported, helpful)
+VALUES (123456789, 'Does this thing work??', 1647207259574, 'Bob', 'bob@email.com', 0, 0);
