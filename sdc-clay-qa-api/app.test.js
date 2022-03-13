@@ -2,14 +2,18 @@ const supertest = require('supertest');
 const app = require('./app.js');
 
 
+
+afterAll
+
 // GET to qa/questions
 
-describe("GET /test", () => {
+describe("GET /questions", () => {
 
   describe("Happy Path", () => {
 
     test("Should get a 200 response from the server", async () => {
-      const response = await supertest(app).get("/questions")
+      const response = await supertest(app).get("/qa/questions")
+      console.log('Response: ', response);
       expect(response.statusCode).toBe(200);
     })
 

@@ -4,6 +4,7 @@ import Overview from './Components/Overview/Overview.jsx';
 import Related from './Components/Related/Related.jsx'
 import RR from './Components/RatingsAndReviews/RatingsAndReviews.jsx';
 import QandA from './Components/QuestionsAndAnswers/QandA.jsx';
+
 class App extends React.Component {
   constructor(props) {
     super(props);
