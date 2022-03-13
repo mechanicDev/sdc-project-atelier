@@ -14,11 +14,7 @@ router.use((req, res, next) => {
 //////////////////
 
 router.get('/questions', (req, res) => {
-  console.log('This should be logging something');
   url = URL.parse(req.url, true).query
-  console.log('Request Params: ', url)
-  console.log('This should be hitting')
-
   U.questionsId(url.product_id)
     .then(data => res.status(200).send(data))
     .catch(error => res.status(200).send(error));
@@ -29,6 +25,10 @@ router.get('/questions/:id/answers', (req, res) => {
     .then(data => res.status(200).send(data))
     .catch(error => res.status(400).send(error))
 });
+
+router.get('products', (req, res) => {
+
+})
 
 
 //////////////////
