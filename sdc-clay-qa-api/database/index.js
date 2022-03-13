@@ -36,6 +36,7 @@ const DB = {
   },
 
   poolQuery: async function (query) {
+    console.log('The Query: ', query);
     const startTime = new Date();
     const client = pool.connect()
     try {

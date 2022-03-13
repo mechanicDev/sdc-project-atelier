@@ -67,20 +67,22 @@ router.put('/answers/:answer_id/report', (req, res) => {
 ///////////////////
 
 router.post('/questions', (req, res) => {
-  // url = URL.parse(req.url, true).query
-  // let body = url.body;
-  // let name = url.name;
-  // let email = url.email;
-  // let product_id = url.product_id;
-  // let date = Date.now()
+  url = URL.parse(req.url, true).query
+  let body = url.body;
+  let name = url.name;
+  let email = url.email;
+  let product_id = url.product_id;
+  let date = Date.now()
   // date = date.toString();
-  // console.log('Date: ', date);
+  console.log('Date: ', date);
 
-  // U.questionsPost(body, name, email, product_id)
-  //   .then(data => res.status(200).send('It worked'))
-  //   .catch(error => res.status(400).send(error));
+  console.log('Params: ', body, name, email, product_id, date);
 
-    res.status(200).send('Route Not Completed')
+  U.questionsPost(body, name, email, product_id, date)
+    .then(data => res.status(200).send('It worked'))
+    .catch(error => res.status(400).send(error));
+
+    // res.status(200).send('Route Not Completed')
 });
 
 module.exports = router;

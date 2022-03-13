@@ -37,9 +37,11 @@ module.exports.questionsId = async function(id, page, count) {
   return result;
 }
 
-module.exports.questionsPost = async function(body, name, email, product_id) {
+module.exports.questionsPost = async function(body, name, email, product_id, date) {
 
-  const result = await DB.poolQuery(`INSERT INTO questions(product_id, body, date_written, asker_name, asker_email, reported, helpful) VALUES (${product_id}, ${body}, ${new Date()}, ${name}, ${email}, ${0}, ${0})`)
+  const insertQuery = `INSERT INTO questions(product_id, body, date_written, asker_name, asker_email, reported, helpful)VALUES(${product_id}, ${body}, ${date}, ${name}, ${email}, 0, 0)`
+
+  const result = await DB.poolQuery(insertQuery);
 
   console.log('Result: ', result);
 };
