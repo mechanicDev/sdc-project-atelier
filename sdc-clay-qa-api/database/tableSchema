@@ -117,3 +117,8 @@ COPY questions(id, product_id, body, date_written, asker_name, asker_email, repo
 FROM File location
 DELIMITER ','
 CSV HEADER;
+
+/* Indexes */
+CREATE INDEX questions_product_id_idx ON questions (product_id);
+
+CREATE INDEX questions_id_answers ON answers (question_id);

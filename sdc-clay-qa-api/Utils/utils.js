@@ -39,7 +39,12 @@ module.exports.questionsId = async function(id, page, count) {
 
 module.exports.questionsPost = async function(body, name, email, product_id, date) {
 
-  const insertQuery = `INSERT INTO questions(product_id, body, date_written, asker_name, asker_email, reported, helpful)VALUES(${product_id}, ${body}, ${date}, ${name}, ${email}, 0, 0)`
+  product_id = parseInt(product_id);
+  console.log('Incoming params: ', product_id, date)
+
+  const insertQuery = `INSERT INTO questions(product_id, body, date_written, asker_name, asker_email, reported, helpful)VALUES(${product_id}, '${body}', ${date}, '${name}', '${email}', 0, 0)`
+
+  const insertTestQuery = ("INSERT INTO questions(product_id, body, date_written, asker_name, asker_email, reported, helpful) VALUES (987654321, 'I really like this product!!', 1647229353040, 'Joe', 'joe@email.com', 0, 0);")
 
   const result = await DB.poolQuery(insertQuery);
 

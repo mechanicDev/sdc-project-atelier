@@ -76,7 +76,7 @@ router.post('/questions', (req, res) => {
   // date = date.toString();
   console.log('Date: ', date);
 
-  console.log('Params: ', body, name, email, product_id, date);
+  console.log('Params: ', body, name, email, typeof product_id, typeof date);
 
   U.questionsPost(body, name, email, product_id, date)
     .then(data => res.status(200).send('It worked'))
