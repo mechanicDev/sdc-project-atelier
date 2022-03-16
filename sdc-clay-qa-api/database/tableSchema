@@ -122,3 +122,6 @@ CSV HEADER;
 CREATE INDEX questions_product_id_idx ON questions (product_id);
 
 CREATE INDEX questions_id_answers ON answers (question_id);
+
+/* Set intervals for tables */
+SELECT setval('table_id_seq', (SELECT MAX(id) FROM table)+1);

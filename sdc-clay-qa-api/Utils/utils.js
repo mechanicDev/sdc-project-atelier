@@ -33,14 +33,14 @@ module.exports.answersIdReported = async function(id) {
 module.exports.questionsId = async function(id, page, count) {
   const result = await DB.poolQuery(`SELECT * FROM questions WHERE product_id = ${id}`)
 
-  console.log('Query Result: ', result);
+  // console.log('Query Result: ', result);
   return result;
 }
 
 module.exports.questionsPost = async function(body, name, email, product_id, date) {
 
   product_id = parseInt(product_id);
-  console.log('Incoming params: ', product_id, date)
+  // console.log('Incoming params: ', product_id, date)
 
   const insertQuery = `INSERT INTO questions(product_id, body, date_written, asker_name, asker_email, reported, helpful)VALUES(${product_id}, '${body}', ${date}, '${name}', '${email}', 0, 0)`
 
@@ -48,11 +48,11 @@ module.exports.questionsPost = async function(body, name, email, product_id, dat
 
   const result = await DB.poolQuery(insertQuery);
 
-  console.log('Result: ', result);
+  // console.log('Result: ', result);
 };
 
 module.exports.questionIdReport = async function(id) {
   const result = await DB.poolQuery(`UPDATE questions SET reported = reported + 1 WHERE id = ${id}`);
 
-  console.log('Result: ', result)
+  // console.log('Result: ', result)
 }

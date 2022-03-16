@@ -30,13 +30,13 @@ const DB = {
     await client.connect();
     const response = await client.query(query)
     const endTime = new Date();
-    console.log(`Operation took ${endTime - startTime}ms`);
+    // console.log(`Operation took ${endTime - startTime}ms`);
     client.end()
     return response.rows;
   },
 
   poolQuery: async function (query) {
-    console.log('The Query: ', query);
+    // console.log('The Query: ', query);
     const startTime = new Date();
     const client = pool.connect()
     try {
@@ -44,7 +44,7 @@ const DB = {
       let response = await pool.query(query)
       // console.log('This is the response thing: ', response.rows)
       const endTime = new Date();
-      console.log(`Operation took ${endTime - startTime}ms`);
+      // console.log(`Operation took ${endTime - startTime}ms`);
       return response.rows;
       client.release()
     } catch (err) {
