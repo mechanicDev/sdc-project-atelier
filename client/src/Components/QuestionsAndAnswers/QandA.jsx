@@ -31,7 +31,11 @@ class QandA extends React.Component {
       }
     }).then((results) => {
       //store questions data in state
-      var questionsUnsorted = results.data.results;
+
+      console.log('Results: ', results)
+
+      // var questionsUnsorted = results.data.results;
+      var questionsUnsorted = results.data;
       var sorted = questionsUnsorted.sort((a, b) => {
         return b.helpfulness - a.helpfulness;
       });
@@ -47,6 +51,7 @@ class QandA extends React.Component {
         product_id: this.props.currentProduct
       }
     }).then((results) => {
+      // console.log('Results: ', results)
       this.setState({ productName: results.data.name });
     }).catch((err) => {
       console.log('Error getting product name: ' + err);

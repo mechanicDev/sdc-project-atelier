@@ -13,10 +13,10 @@ const client = new Client({
 });
 
 const pool = new Pool({
-  user: process.env.USER,
-  host: process.env.HOST,
-  database: process.env.DATABASE,
-  password: process.env.PASSWORD,
+  user: process.env.AWS_USER,
+  host: process.env.AWS_HOST,
+  database: process.env.AWS_DATABASE,
+  // password: process.env.PASSWORD,
   port: process.env.DB_PORT,
   max: 20,
   connectionTimeoutMillis: 0,
@@ -48,7 +48,7 @@ const DB = {
       return response.rows;
       client.release()
     } catch (err) {
-      console.log('Error')
+      console.log('DB Connection Error: ', err)
     }
   }
 }

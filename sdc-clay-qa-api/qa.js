@@ -15,6 +15,7 @@ router.use((req, res, next) => {
 
 // Before 170ms after 20 ms
 router.get('/questions', (req, res) => {
+  console.log('This is the get route for questions/:product_id')
   url = URL.parse(req.url, true).query
   U.questionsId(url.product_id)
     .then(data => res.status(200).send(data))
@@ -29,17 +30,17 @@ router.get('/questions/:id/answers', (req, res) => {
 });
 
 // Test route
-router.get('products', (req, res) => {
+// router.get('products', (req, res) => {
 
-  res.status(200).send({
-    "id": 3,
-    "name": "Morning Joggers",
-    "slogan": "Make yourself a morning person",
-    "description": "Whether you're a morning person or not.  Whether you're gym bound or not.  Everyone looks good in joggers.",
-    "category": "Pants",
-    "default_price": 40
-  })
-})
+//   res.status(200).send({
+//     "id": 3,
+//     "name": "Morning Joggers",
+//     "slogan": "Make yourself a morning person",
+//     "description": "Whether you're a morning person or not.  Whether you're gym bound or not.  Everyone looks good in joggers.",
+//     "category": "Pants",
+//     "default_price": 40
+//   })
+// })
 
 
 //////////////////

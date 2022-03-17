@@ -86,18 +86,39 @@ CREATE TABLE answers_photos (
 
 /* COPY statements to import the CSVs  */
 
+/* For Local deployment */
 COPY questions(id, product_id, body, date_written, asker_name, asker_email, reported, helpful)
-FROM '/Users/user/Desktop/questions.CSV'
+FROM '/Users/user/Desktop/questions.csv'
 DELIMITER ','
 CSV HEADER;
 
+/* For Ubuntu deployment */
+COPY questions(id, product_id, body, date_written, asker_name, asker_email, reported, helpful)
+FROM '/home/ubuntu/questions.csv'
+DELIMITER ','
+CSV HEADER;
+
+/* For Local deployment */
 COPY answers(id, question_id, body, date_written, answerer_name, answerer_email, reported, helpful)
 FROM '/Users/user/Desktop/answers.csv'
 DELIMITER ','
 CSV HEADER;
 
+/* For Ubuntu deployment */
+COPY answers(id, question_id, body, date_written, answerer_name, answerer_email, reported, helpful)
+FROM '/home/ubuntu/answers.csv'
+DELIMITER ','
+CSV HEADER;
+
+/* For Local deployment */
 COPY answers_photos(id, answer_id, url)
 FROM '/Users/user/Desktop/answers_photos.csv'
+DELIMITER ','
+CSV HEADER;
+
+/* For Ubuntu deployment */
+COPY answers_photos(id, answer_id, url)
+FROM '/home/ubuntu/answers_photos.csv'
 DELIMITER ','
 CSV HEADER;
 

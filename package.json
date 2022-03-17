@@ -5,9 +5,11 @@
   "main": "index.js",
   "scripts": {
     "build": "webpack --watch",
+    "server-build": "nodemon server.js",
     "start": "pm2 start ./server.js --watch",
     "test": "jest --coverage",
-    "run": "npm run build & npm run start"
+    "run": "npm run build & npm run start",
+    "stop": "pm2 stop server"
   },
   "repository": {
     "type": "git",
