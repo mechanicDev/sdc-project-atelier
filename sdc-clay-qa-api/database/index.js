@@ -36,10 +36,10 @@ const DB = {
   },
 
   poolQuery: async function (query) {
-    // console.log('The Query: ', query);
+    console.log('The Query: ', query);
     const startTime = new Date();
-    const client = pool.connect()
     try {
+      const client = await pool.connect()
       // console.log('we are here: ', query);
       let response = await pool.query(query)
       // console.log('This is the response thing: ', response.rows)
