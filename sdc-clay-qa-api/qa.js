@@ -24,6 +24,7 @@ router.get('/questions', (req, res) => {
 
 // Before 300ms after 30ms
 router.get('/questions/:id/answers', (req, res) => {
+  console.log('REquest params, ', req.params)
   U.questionsIdAnswers(req.params.id)
     .then(data => res.status(200).send(data))
     .catch(error => res.status(400).send(error))
