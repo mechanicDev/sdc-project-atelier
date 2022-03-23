@@ -1,5 +1,10 @@
 const { client, pool} = require('../database/index.js');
 
+
+////////////////////////////////////
+// Get all answers for a question //
+////////////////////////////////////
+
 module.exports.questionsIdAnswers = async function(id) {
   let result = {};
 
@@ -18,16 +23,61 @@ module.exports.questionsIdAnswers = async function(id) {
   return questionsData;
 };
 
+//////////////////////////////
+// Mark question as helpful //
+//////////////////////////////
+
 module.exports.questionsIdHelpful = async function(id) {
-  const result = await client.query(`UPDATE questions SET helpful = helpful + 1 WHERE id = ${id}`);
+  try {
+    const result = await client.query(`UPDATE questions SET helpful = helpful + 1 WHERE id = ${id}`);
+    return result.rows;
+  } catch (err) {
+    console.log(`Error reporting question ${id} as helpful`);
+    return err;
+  }
 };
 
-module.exports.answersIdHelpful = async function(id) {
-  const result = await client.query(`UPDATE answers SET helpful = helpful + 1 WHERE id = ${id}`);
+////////////////////////////
+// Mark answer as helpful //
+////////////////////////////
+
+module.exports.answersIdHelpful = async function(question_id) {
+  try {
+    const results = await client.query(`UPDATE answers SET helpful = helpful + 1 WHERE id = ${question_id}`);
+    return results.rows
+  } catch (err) {
+    console.log(`Error reporting answer ${question_id} as helpful`);
+    return err;
+  }
 };
+
+///////////////////////
+// Report a question //
+///////////////////////
+
+module.exports.questionIdReport = async function(question_id) {
+  try {
+    const results = await client.query(`UPDATE questions SET reported = reported + 1 WHERE id = ${question_id}`);
+    return results.rows;
+  } catch (err) {
+    console.log(`Error reporting question ${question_id}`);
+    return err;
+  }
+};
+
+//////////////////////
+// Report an answer //
+//////////////////////
+
 
 module.exports.answersIdReported = async function(id) {
-  const result = await client.query(`UPDATE answers SET reported = reported + 1 WHERE id = ${id}`)
+  try {
+    const results = await client.query(`UPDATE answers SET reported = reported + 1 WHERE id = ${id}`);
+    return results.rows;
+  } catch (err) {
+    console.log(`Error reporting answer ${id}`);
+    return err;
+  }
 };
 
 //////////////////////////////////////////////
@@ -69,13 +119,3 @@ module.exports.questionsPost = async function (body, name, email, product_id, da
     return err;
   }
 };
-
-
-///////////////////////
-// Report a question //
-///////////////////////
-
-module.exports.questionIdReport = async function(question_id) {
-  const result = await client.query(`UPDATE questions SET reported = reported + 1 WHERE id = ${question_id}`);
-  console.log('Result: ', result.rows);
-}
