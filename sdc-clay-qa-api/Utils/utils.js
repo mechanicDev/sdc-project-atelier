@@ -1,4 +1,4 @@
-const {client, pool} = require('../database/index.js');
+const { client, pool} = require('../database/index.js');
 
 module.exports.questionsIdAnswers = async function(id) {
   let result = {};
@@ -30,35 +30,52 @@ module.exports.answersIdReported = async function(id) {
   const result = await client.query(`UPDATE answers SET reported = reported + 1 WHERE id = ${id}`)
 };
 
-module.exports.questionsId = async function(id, page, count) {
-  console.log('This is running?? ', id);
-    client.query(`SELECT * FROM questions WHERE product_id = ${id};`)
-      .then(e => {
-        console.log("anything?: ", e.rows)
-        return e.rows;
-        console.log('Query Result: ', result);
-      })
-      .catch(e => {
-        console.log("Error: ", e);
-      })
-}
+//////////////////////////////////////////////
+// Get all questions for a given product ID //
+//////////////////////////////////////////////
 
-module.exports.questionsPost = async function(body, name, email, product_id, date) {
-
-  product_id = parseInt(product_id);
-  // console.log('Incoming params: ', product_id, date)
-
-  const insertQuery = `INSERT INTO questions(product_id, body, date_written, asker_name, asker_email, reported, helpful)VALUES(${product_id}, '${body}', ${date}, '${name}', '${email}', 0, 0)`
-
-  const insertTestQuery = ("INSERT INTO questions(product_id, body, date_written, asker_name, asker_email, reported, helpful) VALUES (987654321, 'I really like this product!!', 1647229353040, 'Joe', 'joe@email.com', 0, 0);")
-
-  client.query(insertQuery)
-    .then(e => console.log("Record has been updated"))
-    .catch(e => console.log("Error: ", e))
+module.exports.questionsId = async function (id, page, count) {
+  try {
+    const results = await client.query(`SELECT * FROM questions WHERE product_id = ${id};`);
+    return results.rows;
+  } catch (err) {
+    console.log('DB Query error');
+    return err
+  }
 };
 
-module.exports.questionIdReport = async function(id) {
-  const result = await client.query(`UPDATE questions SET reported = reported + 1 WHERE id = ${id}`);
+///////////////////////////////
+// Post a question to the DB //
+///////////////////////////////
 
-  // console.log('Result: ', result)
+// Need to make this unique.... //
+
+module.exports.questionsPost = async function (body, name, email, product_id, date) {
+  if (!date) {
+    date = Date.now();
+    console.log('Date: ', date);
+  }
+
+  try {
+    product_id = parseInt(product_id);
+
+    const insertQuery = `INSERT INTO questions(product_id, body, date_written, asker_name, asker_email, reported, helpful)VALUES(${product_id}, '${body}', ${date}, '${name}', '${email}', 0, 0)`
+
+    const results = await client.query(insertQuery);
+    return results.rows;
+
+  } catch (err) {
+    console.log('Question not inserted.');
+    return err;
+  }
+};
+
+
+///////////////////////
+// Report a question //
+///////////////////////
+
+module.exports.questionIdReport = async function(question_id) {
+  const result = await client.query(`UPDATE questions SET reported = reported + 1 WHERE id = ${question_id}`);
+  console.log('Result: ', result.rows);
 }

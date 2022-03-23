@@ -14,6 +14,8 @@ router.use((req, res, next) => {
 //////////////////
 
 // Before 170ms after 20 ms
+
+
 router.get('/questions', (req, res) => {
   console.log('This is the get route for questions/:product_id')
   url = URL.parse(req.url, true).query
@@ -56,7 +58,7 @@ router.put('/questions/:question_id/helpful', (req, res) => {
 });
 
 // Before 77ms - 10ms Might not need to index this
-router.put('/answers/:id/helpful', (req, res) => {
+router.put('/answers/:answers_id/helpful', (req, res) => {
   // console.log('Params: ', req.params)
   U.answersIdHelpful(req.params.id)
   .then(data => res.status(200).send(`Helpful count has been updated for answer ID ${req.params.answer_id}`))
@@ -82,7 +84,7 @@ router.put('/answers/:answer_id/report', (req, res) => {
 // Post Requests //
 ///////////////////
 
-// 49ms -
+// 21ms -
 router.post('/questions', (req, res) => {
   url = URL.parse(req.url, true).query
   let body = url.body;
@@ -90,16 +92,11 @@ router.post('/questions', (req, res) => {
   let email = url.email;
   let product_id = url.product_id;
   let date = Date.now()
-  // date = date.toString();
-  // console.log('Date: ', date);
-
-  // console.log('Params: ', body, name, email, typeof product_id, typeof date);
 
   U.questionsPost(body, name, email, product_id, date)
     .then(data => res.status(200).send('It worked'))
     .catch(error => res.status(400).send(error));
 
-    // res.status(200).send('Route Not Completed')
 });
 
 module.exports = router;
